@@ -8,6 +8,7 @@
 -Nuñez Castelli Santiago - EISI1587 - ISI - 47242651
 
 --------------------------------------------------------
+
 ## Descripción
 Este sistema permite la organización y gestión de préstamos de libros 
 utilizando Collections de Java, aplicando principios de POO como 
@@ -29,7 +30,7 @@ src/
 Este programa no cuenta con un menu, si no que directamente se prueba/testea desde la propia Main asignando valores y llamando métodos.
 
 ## Análisis de la pila de llamadas — 30 iteraciones
-Cuando se llama `calcularMulta(30, 30000)` se generan 31 frames en la pila:
+Cuando se llama "calcularMulta(30, 30000)" se generan 31 iteraciones en la pila:
 
 calcularMulta(30, 30000)  ← iteracion 1
 → calcularMulta(29, 30000)  ← iteracion 2
