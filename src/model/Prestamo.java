@@ -32,20 +32,41 @@ public class Prestamo {
     public LocalDate getFechaDevolucion() { 
         return fechaDevolucion; 
     }
+    
 
-    public double calcularMulta(long diasRetraso, double valorLibro) {
-        
-        if(diasRetraso > 30){
-            diasRetraso=30;
-        }
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
+        this.fechaDevolucion = fechaDevolucion;
+    }
 
-        if(diasRetraso == 0){
-            return 0;
-        }
-       
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((estudiante == null) ? 0 : estudiante.hashCode());
+        result = prime * result + ((libro == null) ? 0 : libro.hashCode());
+        return result;
+    }
 
-        return (valorLibro*0.01) + calcularMulta(diasRetraso - 1,valorLibro);
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Prestamo other = (Prestamo) obj;
+        if (estudiante == null) {
+            if (other.estudiante != null)
+                return false;
+        } else if (!estudiante.equals(other.estudiante))
+            return false;
+        if (libro == null) {
+            if (other.libro != null)
+                return false;
+        } else if (!libro.equals(other.libro))
+            return false;
+        return true;
     }
 
     //ToString

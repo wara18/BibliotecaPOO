@@ -7,13 +7,16 @@ public class Libro {
     private String autor;
     private int anio;
     private boolean disponibilidad;
+    private double valorLibro;
     
-    public Libro(String ISBN, String titulo, String autor, int anio, boolean disponibilidad) {
+    //Constructor
+    public Libro(String ISBN, String titulo, String autor, int anio, boolean disponibilidad, double valorLibro) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
         this.anio = anio;
         this.disponibilidad = disponibilidad;
+        this.valorLibro = valorLibro;
     }
 
 
@@ -38,6 +41,9 @@ public class Libro {
         return disponibilidad;
     }
 
+    public double getValorLibro() { 
+        return valorLibro; 
+    }
     
 
     public void setDisponibilidad(boolean disponibilidad) {

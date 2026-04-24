@@ -19,7 +19,7 @@ public class BibliotecaService {
     private HashMap<String, Estudiante> estudiantes; // clave es el legajo
     private HashSet<Prestamo> prestamosActivos;
 
-
+    
     public BibliotecaService() { // Constructor
         this.catalogo = new ArrayList<>();
         this.estudiantes = new HashMap<>();
@@ -27,6 +27,7 @@ public class BibliotecaService {
 
     }
 
+    //Prestamos Por Estudiante
     public int prestamosPorEstudiante(Estudiante estudiante){
 
         int cantPrestamos=0;
@@ -38,12 +39,12 @@ public class BibliotecaService {
         return cantPrestamos;
     }
 
-    //Sumar libros a la biblioteca
+    //Sumar libros a la biblioteca.
     public void registrarLibro(Libro libro){
         catalogo.add(libro);
     }
 
-    //Sumar estudiantes al listado de la biblioteca ashei
+    //Sumar estudiantes al listado de la biblioteca.
     public void registrarEstudiante(Estudiante estudiante){ // 
         estudiantes.put(estudiante.getLegajo(),estudiante);
     }
@@ -66,6 +67,7 @@ public class BibliotecaService {
         libro.setDisponibilidad(false); // Se cambia la disponibilidad
     }
     
+    // Metodo para devolver libros.
     public void registrarDevolucion(Libro libro) {
 
         Prestamo prestamoEncontrado = null;
@@ -79,7 +81,7 @@ public class BibliotecaService {
        
         if(prestamoEncontrado != null){
             libro.setDisponibilidad(true);
-            long diasRetraso = ChronoUnit.DAYS.between(prestamoEncontrado.getFechaDevolucion(), LocalDate.now());
+            long diasRetraso = ChronoUnit.DAYS.between(prestamoEncontrado.getFechaPrestamo(), LocalDate.now());
             double valorLibro = prestamoEncontrado.getLibro().getValorLibro();
             
             if(diasRetraso > 0) {
@@ -91,12 +93,15 @@ public class BibliotecaService {
                 }
             }
             
+            prestamoEncontrado.setFechaDevolucion(LocalDate.now()); // seteamos la fecha de devolucion del libro
+            prestamosActivos.remove(prestamoEncontrado); //  borramos el prestamo una vez devuelto
             
         }
     
 
     }
 
+    // metodo calcular multa segun retraso.
     public double calcularMulta(int diasRetraso, double valorLibro) {
         
         if(diasRetraso > 30){
@@ -112,27 +117,27 @@ public class BibliotecaService {
 
     }
 
+    // Metodo para buscar libro parcialmente por titulo.
+    public void buscarLibro(String texto){
 
-    public void buscarLibro(Libro libro){
-        for (Libro librox : catalogo) {
-            if() {
-
-                
-
-
-                
+        for(Libro libro : catalogo){
+            if(libro.getTitulo().toLowerCase().contains(texto.toLowerCase())){
+                System.out.println("Libro encontrado: " + libro.getTitulo());
             }
         }
     }
 
+    // Metodo para ver los prestamos por estudiante.
     public void listarPrestamosPorEstudiante(Estudiante estudiante){
-
-            
-        
+        for(Prestamo prestamo : prestamosActivos){
+            if(prestamo.getEstudiante().getLegajo().equals(estudiante.getLegajo())){
+                System.out.println(prestamo);
+            }
+        }
     }
 
 
-
+    //ToS
     @Override
     public String toString() {
         return "BibliotecaService [catalogo=" + catalogo + "\n";
